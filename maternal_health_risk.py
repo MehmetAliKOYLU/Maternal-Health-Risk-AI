@@ -95,8 +95,8 @@ def newprediction():
     v1 = int(input("Enter your age: "))
     v2 = int(input("Enter your Systolic BP: "))
     v3 = int(input("Enter your Diastolic BP: "))
-    v4 = float(input("Enter your BS: "))  # Change this from "Blood Sugar" to "BS"
-    v5 = int(input("Enter your BodyTemp: "))  # Change this from "Body Temperature" to "BodyTemp"
+    v4 = float(input("Enter your BS: "))  
+    v5 = int(input("Enter your BodyTemp: ")) 
     v6 = int(input("Enter your HeartRate: "))
 
     new_prediction = RFCmodel.predict(np.array([[v1, v2, v3, v4, v5, v6]]))
