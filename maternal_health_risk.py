@@ -36,8 +36,8 @@ plt.show()
 
 y= data.RiskLevel.values
 
-x_raw_data = data.drop(["RiskLevel"],axis=1)
-x=(x_raw_data-np.min(x_raw_data.values))/(np.max(x_raw_data.values)-np.min(x_raw_data.values))
+x = data.drop(["RiskLevel"],axis=1)
+
 
 
 x_train, x_test, y_train, y_test =train_test_split (x,y,test_size = 0.1,random_state=5)
@@ -70,7 +70,7 @@ final_knn.fit(x_train, y_train)
 accuracy = final_knn.score(x_test, y_test)
 print(f"Accuracy with optimal k value: %{accuracy * 100:.2f}")
 sc = MinMaxScaler()
-sc.fit_transform(x_raw_data.values)
+sc.fit_transform(x.values)
 ###############################################################
 
 
@@ -92,24 +92,30 @@ print( "\n" )
 
 #we are using random forest classifier for training and testing purposes because accuracy score is better than other classifiers
 def newprediction():
-    v1=int(input("age >> "))
-    v2=int(input("SystolicBP >> "))
-    v3=int(input("DiastolicBP >> "))
-    v4=float(input("BS >> "))
-    v5=int(input("BodyTemp >> "))
-    v6=int(input("HeartRate >> "))
+    v1 = int(input("Enter your age: "))
+    v2 = int(input("Enter your Systolic BP: "))
+    v3 = int(input("Enter your Diastolic BP: "))
+    v4 = float(input("Enter your BS: "))  # Change this from "Blood Sugar" to "BS"
+    v5 = int(input("Enter your BodyTemp: "))  # Change this from "Body Temperature" to "BodyTemp"
+    v6 = int(input("Enter your HeartRate: "))
 
-    new_prediction = RFCmodel.predict(sc.transform(np.array([[v1,v2,v3,v4,v5,v6]])))
-    new_prediction[0]
-    print(new_prediction[0])
+    new_prediction = RFCmodel.predict(np.array([[v1, v2, v3, v4, v5, v6]]))
 
+    if new_prediction[0] == "low risk":
+        print("You are in the Low Risk category. Take good care of your health.")
+    elif new_prediction[0] == "mid risk":
+        print("You are in the Mid Risk category. Pay attention to your health and consult a healthcare professional.")
+    elif new_prediction[0] == "high risk":
+        print("You are in the High Risk category. It's essential to consult a healthcare professional immediately.")
+    else:
+        print("Invalid prediction.")
 
 while True:
     newprediction()
-    choose=input("do you want to continue ? (y/n)  >>"  )
-    choose=choose.lower()
-    if choose=="y":
+    choose = input("Do you want to continue? (y/n): ")
+    choose = choose.lower()
+    if choose == "y":
         continue
-    elif choose=="n":
-        print("exiting...")
+    elif choose == "n":
+        print("Exiting...")
         break
