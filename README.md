@@ -36,11 +36,9 @@ plt.show()
 ```
 ![image](https://github.com/MehmetAliKOYLU/Maternal-Health-Risk-AI/assets/91757385/49a664eb-00ad-4baa-956a-6f18a884a8e1)
 
-### let's determine the x and y axes
 
 y= data.RiskLevel.values
-x_raw_data = data.drop(["RiskLevel"],axis=1)
-x=(x_raw_data-np.min(x_raw_data.values))/(np.max(x_raw_data.values)-np.min(x_raw_data.values))
+x = data.drop(["RiskLevel"],axis=1)
 
 ## we separate our test data with our train data
 ### our train data will be used to learn how the system distinguishes between a healthy person and a sick person. if our test data is, let's see if our machine learning model can accurately distinguish between sick and healthy people it will be used for testing...
